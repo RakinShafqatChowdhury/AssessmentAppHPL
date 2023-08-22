@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +13,10 @@ import android.widget.Toast;
 
 import com.example.assessmentapphpl.databinding.ActivityMainBinding;
 import com.example.assessmentapphpl.databinding.OtpVerificationLayoutBinding;
+import com.example.assessmentapphpl.helper.Constants;
 import com.example.assessmentapphpl.helper.ProgressDialogUtil;
+import com.example.assessmentapphpl.helper.Utils;
+import com.example.assessmentapphpl.view.RegistrationActivity;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -101,16 +105,20 @@ public class MainActivity extends AppCompatActivity {
     private void signInWithCredential(PhoneAuthCredential credential) {
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
+
                     if(alertDialog != null && alertDialog.isShowing())
                         alertDialog.dismiss();
+                    ProgressDialogUtil.dismissProgressDialog();
 
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Successfully Verified", Toast.LENGTH_SHORT).show();
+                        Utils.toast(this, "Successfully Verified");
+                        Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
+                        intent.putExtra(Constants.PASS_USER_PHONE_NUMBER, phoneNumber);
+                        startActivity(intent);
                     } else {
-                        Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                        Utils.toast(this, "Something went wrong!");
                     }
 
-                    ProgressDialogUtil.dismissProgressDialog();
                 });
     }
 

@@ -1,38 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/_40sdp"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_margin="@dimen/_40sdp"
         tools:context=".MainActivity">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter Phone Number"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:textSize="@dimen/_14ssp"/>
+            android:text="Enter Phone Number"
+            android:textSize="@dimen/_14ssp" />
 
-        <EditText
-            android:id="@+id/phoneNumberET"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:hint="01XXXXXXXXX"
-            android:background="@drawable/edittext_bg"
-            android:paddingStart="@dimen/_5sdp"
-            android:inputType="phone"
-            android:maxLength="11" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight=".2"
+                android:background="@drawable/edittext_bg"
+                android:gravity="center"
+                android:hint="+88"
+                android:textSize="@dimen/_13ssp" />
+
+            <EditText
+                android:id="@+id/phoneNumberET"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_weight=".8"
+                android:background="@drawable/edittext_bg"
+                android:hint="01XXXXXXXXX"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingStart="@dimen/_5sdp" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/reqOtpBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Request OTP"
-            android:layout_marginTop="@dimen/_10sdp"/>
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Request OTP" />
 
     </LinearLayout>
 </layout>
