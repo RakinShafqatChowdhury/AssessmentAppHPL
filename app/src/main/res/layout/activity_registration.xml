@@ -56,7 +56,6 @@
                     android:gravity="center_vertical"
                     android:hint="Username"
                     android:inputType="textPersonName"
-                    android:maxLength="4"
                     android:paddingStart="@dimen/_5sdp"
                     android:textSize="@dimen/_12ssp" />
 
@@ -76,7 +75,6 @@
                     android:gravity="center_vertical"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
-                    android:maxLength="4"
                     android:paddingStart="@dimen/_5sdp"
                     android:textSize="@dimen/_12ssp" />
 
