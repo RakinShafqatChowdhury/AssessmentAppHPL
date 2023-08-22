@@ -11,14 +11,20 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AssessmentAppHPL"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.HomeScreenActivity"
+            android:label="Homescreen"
+            android:exported="false" />
+        <activity
             android:name=".view.RegistrationActivity"
+            android:label="Registration"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:label="OTP Verification"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

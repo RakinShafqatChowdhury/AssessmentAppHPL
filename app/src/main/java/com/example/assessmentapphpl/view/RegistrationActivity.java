@@ -1,22 +1,23 @@
 package com.example.assessmentapphpl.view;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.assessmentapphpl.R;
 import com.example.assessmentapphpl.databinding.ActivityRegistrationBinding;
 import com.example.assessmentapphpl.helper.Constants;
 import com.example.assessmentapphpl.helper.ProgressDialogUtil;
+import com.example.assessmentapphpl.helper.SharedPref;
 import com.example.assessmentapphpl.helper.Utils;
 import com.example.assessmentapphpl.helper.ValidationUtil;
 import com.example.assessmentapphpl.model.UnlinkRegistryModel;
 import com.example.assessmentapphpl.model.UserRegistrationModel;
 import com.example.assessmentapphpl.viewmodel.AssessmentViewModel;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -58,11 +59,14 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void submitRegistrationData() {
         ProgressDialogUtil.showProgressDialog(this, "Submitting info...");
+
         UserRegistrationModel userRegistrationModel = new UserRegistrationModel();
 
         userRegistrationModel.setUserName(binding.userNameET.getText().toString().trim());
         userRegistrationModel.setUserEmail(binding.userEmailET.getText().toString().trim());
         userRegistrationModel.setUserPhoneNumber(binding.contactNumberET.getText().toString().trim());
+
+        SharedPref.getInstance(this).saveUserInfo(userRegistrationModel);
 
         assessmentViewModel
                 .submitUserRegData(userRegistrationModel)
@@ -101,7 +105,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void gotoHomePage() {
-
+        startActivity(new Intent(RegistrationActivity.this, HomeScreenActivity.class));
     }
 
     private void openUnlinkRegistryDialog() {

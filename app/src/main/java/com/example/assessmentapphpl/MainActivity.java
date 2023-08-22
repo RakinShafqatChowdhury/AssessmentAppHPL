@@ -24,6 +24,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -112,17 +113,17 @@ public class MainActivity extends AppCompatActivity {
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
 
-                    if(alertDialog != null && alertDialog.isShowing())
-                        alertDialog.dismiss();
                     ProgressDialogUtil.dismissProgressDialog();
 
                     if (task.isSuccessful()) {
+                        if(alertDialog != null && alertDialog.isShowing())
+                            alertDialog.dismiss();
                         Utils.toast(this, "Successfully Verified");
                         Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
                         intent.putExtra(Constants.PASS_USER_PHONE_NUMBER, phoneNumber);
                         startActivity(intent);
                     } else {
-                        Utils.toast(this, "Something went wrong!");
+                        Utils.toast(this, Objects.requireNonNull(task.getException()).getLocalizedMessage());
                     }
                 });
     }
