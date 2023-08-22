@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,7 +31,7 @@
         <EditText
             android:id="@+id/otpInputET"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_below="@id/otpSentText"
             android:inputType="number"
             android:layout_marginStart="@dimen/_10sdp"
@@ -41,8 +39,8 @@
             android:paddingStart="@dimen/_5sdp"
             android:background="@drawable/edittext_bg"
             android:maxLength="6"
-            android:hint="Enter OTP"
-            android:textSize="@dimen/_10ssp" />
+            android:hint="Enter 6 digit OTP"
+            android:textSize="@dimen/_11ssp" />
 
 
         <Button
