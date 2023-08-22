@@ -32,7 +32,7 @@
                 android:background="@drawable/edittext_bg"
                 android:gravity="center"
                 android:hint="+88"
-                android:textSize="@dimen/_13ssp" />
+                android:textSize="@dimen/_14ssp" />
 
             <EditText
                 android:id="@+id/phoneNumberET"

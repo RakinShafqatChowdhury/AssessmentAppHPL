@@ -16,6 +16,7 @@ import com.example.assessmentapphpl.databinding.OtpVerificationLayoutBinding;
 import com.example.assessmentapphpl.helper.Constants;
 import com.example.assessmentapphpl.helper.ProgressDialogUtil;
 import com.example.assessmentapphpl.helper.Utils;
+import com.example.assessmentapphpl.helper.ValidationUtil;
 import com.example.assessmentapphpl.view.RegistrationActivity;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,21 +43,19 @@ public class MainActivity extends AppCompatActivity {
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
-                        // Automatically sign in with the credential
-                        ProgressDialogUtil.dismissProgressDialog();
-                        signInWithCredential(credential);
+
                     }
 
                     @Override
                     public void onVerificationFailed(@NonNull FirebaseException e) {
-                        // Handle verification failure
+
                         ProgressDialogUtil.dismissProgressDialog();
                         runOnUiThread(() -> Toast.makeText(MainActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show());
                     }
 
                     @Override
                     public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken token) {
-                        // Code sent to user's phone, get the verificationId
+
                         verificationID = verificationId;
                         phoneNumber = binding.phoneNumberET.getText().toString().trim();
                         ProgressDialogUtil.dismissProgressDialog();
@@ -87,6 +86,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         verifyOTPBinding.verifyOtpBtn.setOnClickListener(view -> {
+
+            if(!ValidationUtil.isValidOTP(verifyOTPBinding.otpInputET.getText().toString().trim())){
+                Utils.toast(this, "Please enter valid OTP");
+                return;
+            }
+
+
             ProgressDialogUtil.showProgressDialog(this, "Verifying...");
             PhoneAuthCredential credential =
                     PhoneAuthProvider.getCredential(verificationId, verifyOTPBinding.otpInputET.getText().toString().trim());
@@ -118,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         Utils.toast(this, "Something went wrong!");
                     }
-
                 });
     }
 
