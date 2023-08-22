@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:gravity="center_horizontal"
+            android:text="Verification"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/otpSentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:gravity="center"
+            android:textSize="@dimen/_12ssp" />
+
+        <EditText
+            android:id="@+id/otpInputET"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_below="@id/otpSentText"
+            android:inputType="number"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:paddingStart="@dimen/_5sdp"
+            android:background="@drawable/edittext_bg"
+            android:maxLength="6"
+            android:hint="Enter OTP"
+            android:textSize="@dimen/_10ssp" />
+
+
+        <Button
+            android:id="@+id/verifyOtpBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/otpInputET"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/edittext_bg"
+            android:text="submit"
+            android:textColor="@color/black" />
+
+
+    </RelativeLayout>
+
+</layout>
