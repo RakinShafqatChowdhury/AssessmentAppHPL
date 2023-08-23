@@ -75,7 +75,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     switch (stringResource.status) {
                         case SUCCESS:
                             if (stringResource.data != null)
-                                showSuccessAlert("Congratulations", stringResource.data);
+                                showSuccessAlert("Congratulations", stringResource.data, true);
                             else
                                 Utils.toast(this, stringResource.message);
                             break;
@@ -92,13 +92,14 @@ public class RegistrationActivity extends AppCompatActivity {
                 });
     }
 
-    private void showSuccessAlert(String title, String data) {
+    private void showSuccessAlert(String title, String data, boolean redirect) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title)
                 .setMessage(data)
                 .setPositiveButton("OK", (dialog, which) -> {
                     dialog.dismiss();
-                    gotoHomePage();
+                    if (redirect)
+                        gotoHomePage();
                 })
                 .setCancelable(false)
                 .show();
@@ -116,9 +117,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     dialog.dismiss();
                     unlinkRegistration(userPhoneNumber);
                 })
-                .setNegativeButton("CANCEL", (dialog, which) -> {
-                    dialog.dismiss();
-                })
+                .setNegativeButton("CANCEL", (dialog, which) -> dialog.dismiss())
                 .setCancelable(false)
                 .show();
     }
@@ -135,7 +134,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     switch (stringResource.status) {
                         case SUCCESS:
                             if (stringResource.data != null)
-                                showSuccessAlert("Unlinked", stringResource.data);
+                                showSuccessAlert("Unlinked", stringResource.data, false);
                             else
                                 Utils.toast(this, stringResource.message);
                             break;
@@ -143,7 +142,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             break;
                         case ERROR:
                             if (stringResource.message != null && stringResource.message.equals("Unlink error")) {
-                                showSuccessAlert("Failed", stringResource.data);
+                                showSuccessAlert("Failed", stringResource.data, false);
                                 break;
                             }
                             Utils.toast(this, stringResource.message);

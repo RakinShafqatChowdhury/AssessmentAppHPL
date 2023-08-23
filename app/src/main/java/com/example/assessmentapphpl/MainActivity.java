@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     String verificationID;
     String phoneNumber;
     AlertDialog alertDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onVerificationFailed(@NonNull FirebaseException e) {
 
                         ProgressDialogUtil.dismissProgressDialog();
-                        runOnUiThread(() -> Toast.makeText(MainActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show());
+                        runOnUiThread(() -> Toast.makeText(MainActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show());
                     }
 
                     @Override
@@ -65,11 +66,17 @@ public class MainActivity extends AppCompatActivity {
                 };
 
         binding.reqOtpBtn.setOnClickListener(view -> {
+
+            if (!ValidationUtil.isValidPhoneNumber(binding.phoneNumberET.getText().toString().trim())) {
+                Utils.toast(this, "Please enter valid phone number");
+                return;
+            }
+
             ProgressDialogUtil.showProgressDialog(this, "Please wait...");
 
             PhoneAuthOptions options =
                     PhoneAuthOptions.newBuilder(auth)
-                            .setPhoneNumber("+88"+binding.phoneNumberET.getText().toString().trim())
+                            .setPhoneNumber("+88" + binding.phoneNumberET.getText().toString().trim())
                             .setTimeout(60L, TimeUnit.SECONDS)
                             .setActivity(MainActivity.this)
                             .setCallbacks(callbacks)
@@ -88,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         verifyOTPBinding.verifyOtpBtn.setOnClickListener(view -> {
 
-            if(!ValidationUtil.isValidOTP(verifyOTPBinding.otpInputET.getText().toString().trim())){
+            if (!ValidationUtil.isValidOTP(verifyOTPBinding.otpInputET.getText().toString().trim())) {
                 Utils.toast(this, "Please enter valid OTP");
                 return;
             }
@@ -116,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                     ProgressDialogUtil.dismissProgressDialog();
 
                     if (task.isSuccessful()) {
-                        if(alertDialog != null && alertDialog.isShowing())
+                        if (alertDialog != null && alertDialog.isShowing())
                             alertDialog.dismiss();
                         Utils.toast(this, "Successfully Verified");
                         Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);

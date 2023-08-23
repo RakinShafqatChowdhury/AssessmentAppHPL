@@ -7,6 +7,9 @@ public class ValidationUtil {
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final String OTP_PATTERN = "^[0-9]{6,}$";
 
+    private static final String PHONE_NUMBER_PATTERN = "^[0-9]{11,}$";
+
+
     public static boolean isValidEmail(String email) {
         if (email == null || email.isEmpty()) {
             return false;
@@ -21,6 +24,14 @@ public class ValidationUtil {
         }
 
         return otp.matches(OTP_PATTERN);
+    }
+
+    public static boolean isValidPhoneNumber(String phoneNumber) {
+        if (phoneNumber == null || phoneNumber.isEmpty()) {
+            return false;
+        }
+
+        return phoneNumber.matches(PHONE_NUMBER_PATTERN);
     }
 
     public static boolean isValidField(EditText editText) {
