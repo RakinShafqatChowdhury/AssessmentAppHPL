@@ -144,8 +144,10 @@ public class RegistrationActivity extends AppCompatActivity {
                     ProgressDialogUtil.dismissProgressDialog();
                     switch (stringResource.status) {
                         case SUCCESS:
-                            if (stringResource.data != null)
+                            if (stringResource.data != null) {
                                 showSuccessAlert("Unlinked", stringResource.data, false);
+                                SharedPref.getInstance(this).clearSharedPrefData();
+                            }
                             else
                                 Utils.toast(this, stringResource.message);
                             break;

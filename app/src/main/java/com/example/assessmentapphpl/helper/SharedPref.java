@@ -30,4 +30,10 @@ public class SharedPref {
     public UserRegistrationModel getUserInfo() {
         return new Gson().fromJson(sharedPreferences.getString(USER_INFO, null), UserRegistrationModel.class);
     }
+
+    public void clearSharedPrefData() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 }
