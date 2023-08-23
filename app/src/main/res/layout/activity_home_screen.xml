@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="userInfoModel"
             type="com.example.assessmentapphpl.model.UserRegistrationModel" /> <!-- Replace with your ViewModel class -->
@@ -19,15 +20,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/versionTV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:gravity="center"
-                android:textSize="@dimen/_7ssp" />
-
-
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_40sdp"
@@ -42,6 +34,7 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 app:cardCornerRadius="@dimen/_8sdp"
                 app:cardElevation="@dimen/_10sdp">
 
@@ -66,9 +59,9 @@
                         android:background="@drawable/edittext_bg"
                         android:gravity="center_vertical"
                         android:hint="Username"
-                        android:text="@{userInfoModel.userName}"
                         android:inputType="textPersonName"
                         android:paddingStart="@dimen/_5sdp"
+                        android:text="@{userInfoModel.userName}"
                         android:textSize="@dimen/_12ssp" />
 
                     <TextView
@@ -86,9 +79,9 @@
                         android:background="@drawable/edittext_bg"
                         android:gravity="center_vertical"
                         android:hint="Email"
-                        android:text="@{userInfoModel.userEmail}"
                         android:inputType="textEmailAddress"
                         android:paddingStart="@dimen/_5sdp"
+                        android:text="@{userInfoModel.userEmail}"
                         android:textSize="@dimen/_12ssp" />
 
 
@@ -108,10 +101,10 @@
                         android:background="@drawable/edittext_bg"
                         android:gravity="center_vertical"
                         android:hint="01XXXXXXXX"
-                        android:text="@{userInfoModel.userPhoneNumber}"
                         android:inputType="phone"
                         android:maxLength="11"
                         android:paddingStart="@dimen/_5sdp"
+                        android:text="@{userInfoModel.userPhoneNumber}"
                         android:textSize="@dimen/_12ssp" />
 
                     <LinearLayout
