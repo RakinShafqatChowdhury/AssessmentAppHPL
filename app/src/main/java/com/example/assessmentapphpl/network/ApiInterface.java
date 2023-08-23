@@ -6,6 +6,8 @@ import com.example.assessmentapphpl.model.UnlinkRegistryModel;
 import com.example.assessmentapphpl.model.UserRegistrationModel;
 import com.google.gson.JsonObject;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
@@ -24,7 +26,7 @@ public interface ApiInterface {
     Call<String> saveTaskData(@Body TaskEntryModel taskEntryModel);
 
     @POST("TaskData")
-    Call<TaskDataResponseModel> fetchTaskData(@Body JsonObject contactNumberObject);
+    Call<List<TaskDataResponseModel>> fetchTaskData(@Body JsonObject contactNumberObject);
 
 
 }

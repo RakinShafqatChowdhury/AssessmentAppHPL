@@ -4,11 +4,15 @@ import android.app.Application;
 
 import com.example.assessmentapphpl.helper.Constants;
 import com.example.assessmentapphpl.helper.Resource;
+import com.example.assessmentapphpl.model.TaskDataResponseModel;
 import com.example.assessmentapphpl.model.TaskEntryModel;
 import com.example.assessmentapphpl.model.UnlinkRegistryModel;
 import com.example.assessmentapphpl.model.UserRegistrationModel;
 import com.example.assessmentapphpl.network.ApiInterface;
 import com.example.assessmentapphpl.network.RetrofitClient;
+import com.google.gson.JsonObject;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -92,6 +96,29 @@ public class AssessmentRepository {
                 });
 
         return saveTaskResponseLiveData;
+    }
+
+    public MutableLiveData<Resource<List<TaskDataResponseModel>>> fetchTaskData(JsonObject phoneNumberObject) {
+
+        final MutableLiveData<Resource<List<TaskDataResponseModel>>> fetchedTaskDataResponseLiveData = new MutableLiveData<>();
+        apiInterface
+                .fetchTaskData(phoneNumberObject)
+                .enqueue(new Callback<List<TaskDataResponseModel>>() {
+                    @Override
+                    public void onResponse(@NonNull Call<List<TaskDataResponseModel>> call, @NonNull Response<List<TaskDataResponseModel>> response) {
+                        if (response.isSuccessful())
+                            fetchedTaskDataResponseLiveData.postValue(Resource.success(response.body()));
+                        else
+                            fetchedTaskDataResponseLiveData.postValue(Resource.error(response.message(), null));
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<List<TaskDataResponseModel>> call, @NonNull Throwable t) {
+                        fetchedTaskDataResponseLiveData.postValue(Resource.error(t.getMessage(), null));
+                    }
+                });
+
+        return fetchedTaskDataResponseLiveData;
     }
 
 }

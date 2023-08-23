@@ -3,10 +3,14 @@ package com.example.assessmentapphpl.viewmodel;
 import android.app.Application;
 
 import com.example.assessmentapphpl.helper.Resource;
+import com.example.assessmentapphpl.model.TaskDataResponseModel;
 import com.example.assessmentapphpl.model.TaskEntryModel;
 import com.example.assessmentapphpl.model.UnlinkRegistryModel;
 import com.example.assessmentapphpl.model.UserRegistrationModel;
 import com.example.assessmentapphpl.repository.AssessmentRepository;
+import com.google.gson.JsonObject;
+
+import java.util.List;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -15,9 +19,7 @@ import androidx.lifecycle.MutableLiveData;
 public class AssessmentViewModel extends AndroidViewModel {
 
     private final AssessmentRepository assessmentRepository;
-    private final MutableLiveData<String> ekycComplete = new MutableLiveData<>();
-    private final MutableLiveData<Integer> result = new MutableLiveData<>();
-    private final MutableLiveData<Integer> closeFragment = new MutableLiveData<>();
+    private MutableLiveData<Resource<List<TaskDataResponseModel>>> taskDataLiveDataList;
 
     public AssessmentViewModel(Application mApplication) {
         super(mApplication);
@@ -34,6 +36,13 @@ public class AssessmentViewModel extends AndroidViewModel {
 
     public LiveData<Resource<String>> saveTaskData(TaskEntryModel taskEntryModel) {
         return assessmentRepository.saveTaskData(taskEntryModel);
+    }
+
+    public LiveData<Resource<List<TaskDataResponseModel>>> fetchTaskData(JsonObject phoneNumberObject) {
+        if (taskDataLiveDataList == null)
+            taskDataLiveDataList = assessmentRepository.fetchTaskData(phoneNumberObject);
+
+        return taskDataLiveDataList;
     }
 
 }
