@@ -1,9 +1,5 @@
 package com.example.assessmentapphpl;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -14,6 +10,7 @@ import android.widget.Toast;
 import com.example.assessmentapphpl.databinding.ActivityMainBinding;
 import com.example.assessmentapphpl.databinding.OtpVerificationLayoutBinding;
 import com.example.assessmentapphpl.helper.Constants;
+import com.example.assessmentapphpl.helper.NetworkUtils;
 import com.example.assessmentapphpl.helper.ProgressDialogUtil;
 import com.example.assessmentapphpl.helper.Utils;
 import com.example.assessmentapphpl.helper.ValidationUtil;
@@ -26,6 +23,10 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,12 +73,16 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
+            if (!NetworkUtils.isConnected(this)) {
+                Utils.toast(this, getString(R.string.network_error_msg));
+                return;
+            }
             ProgressDialogUtil.showProgressDialog(this, "Please wait...");
 
             PhoneAuthOptions options =
                     PhoneAuthOptions.newBuilder(auth)
                             .setPhoneNumber("+88" + binding.phoneNumberET.getText().toString().trim())
-                            .setTimeout(60L, TimeUnit.SECONDS)
+                            .setTimeout(30L, TimeUnit.SECONDS)
                             .setActivity(MainActivity.this)
                             .setCallbacks(callbacks)
                             .build();

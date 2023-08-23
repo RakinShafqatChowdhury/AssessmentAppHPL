@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.example.assessmentapphpl.R;
 import com.example.assessmentapphpl.databinding.ActivityRegistrationBinding;
 import com.example.assessmentapphpl.helper.Constants;
+import com.example.assessmentapphpl.helper.NetworkUtils;
 import com.example.assessmentapphpl.helper.ProgressDialogUtil;
 import com.example.assessmentapphpl.helper.SharedPref;
 import com.example.assessmentapphpl.helper.Utils;
@@ -51,6 +52,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
         if (!ValidationUtil.isValidEmail(binding.userEmailET.getText().toString().trim())) {
             Utils.alert(this, "Warning!", "Please enter valid email");
+            return;
+        }
+
+        if (!NetworkUtils.isConnected(this)) {
+            Utils.toast(this, getString(R.string.network_error_msg));
             return;
         }
 
@@ -123,6 +129,11 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void unlinkRegistration(String userPhoneNumber) {
+        if (!NetworkUtils.isConnected(this)) {
+            Utils.toast(this, getString(R.string.network_error_msg));
+            return;
+        }
+
         ProgressDialogUtil.showProgressDialog(this, "Please wait...");
         UnlinkRegistryModel unlinkRegistryModel = new UnlinkRegistryModel();
         unlinkRegistryModel.setUserPhoneNumber(userPhoneNumber);

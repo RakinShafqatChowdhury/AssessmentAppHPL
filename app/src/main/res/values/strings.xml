@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AssessmentAppHPL</string>
+    <string name="network_error_msg">Please check network connectivity</string>
 </resources>
