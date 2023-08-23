@@ -3,6 +3,7 @@ package com.example.assessmentapphpl.viewmodel;
 import android.app.Application;
 
 import com.example.assessmentapphpl.helper.Resource;
+import com.example.assessmentapphpl.model.TaskEntryModel;
 import com.example.assessmentapphpl.model.UnlinkRegistryModel;
 import com.example.assessmentapphpl.model.UserRegistrationModel;
 import com.example.assessmentapphpl.repository.AssessmentRepository;
@@ -29,6 +30,10 @@ public class AssessmentViewModel extends AndroidViewModel {
 
     public LiveData<Resource<String>> unlinkUserRegData(UnlinkRegistryModel unlinkRegistryModel) {
         return assessmentRepository.unlinkUserRegistrationData(unlinkRegistryModel);
+    }
+
+    public LiveData<Resource<String>> saveTaskData(TaskEntryModel taskEntryModel) {
+        return assessmentRepository.saveTaskData(taskEntryModel);
     }
 
 }

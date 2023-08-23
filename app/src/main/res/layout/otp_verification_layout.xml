@@ -33,15 +33,15 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_below="@id/otpSentText"
-            android:inputType="number"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:paddingStart="@dimen/_5sdp"
             android:background="@drawable/edittext_bg"
-            android:maxLength="6"
+            android:gravity="center"
             android:hint="Enter 6 digit OTP"
-            android:textSize="@dimen/_11ssp" />
-
+            android:inputType="number"
+            android:maxLength="6"
+            android:paddingStart="@dimen/_5sdp"
+            android:textSize="@dimen/_13ssp" />
 
         <Button
             android:id="@+id/verifyOtpBtn"

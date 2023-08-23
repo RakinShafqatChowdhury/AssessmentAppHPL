@@ -1,7 +1,10 @@
 package com.example.assessmentapphpl.network;
 
+import com.example.assessmentapphpl.model.TaskDataResponseModel;
+import com.example.assessmentapphpl.model.TaskEntryModel;
 import com.example.assessmentapphpl.model.UnlinkRegistryModel;
 import com.example.assessmentapphpl.model.UserRegistrationModel;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -16,6 +19,12 @@ public interface ApiInterface {
 
     @POST("UnlinkRegistry")
     Call<String> unlinkRegistry(@Body UnlinkRegistryModel unlinkRegistryModel);
+
+    @POST("TaskEntry")
+    Call<String> saveTaskData(@Body TaskEntryModel taskEntryModel);
+
+    @POST("TaskData")
+    Call<TaskDataResponseModel> fetchTaskData(@Body JsonObject contactNumberObject);
 
 
 }

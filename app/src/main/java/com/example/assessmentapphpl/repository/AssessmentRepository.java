@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.assessmentapphpl.helper.Constants;
 import com.example.assessmentapphpl.helper.Resource;
+import com.example.assessmentapphpl.model.TaskEntryModel;
 import com.example.assessmentapphpl.model.UnlinkRegistryModel;
 import com.example.assessmentapphpl.model.UserRegistrationModel;
 import com.example.assessmentapphpl.network.ApiInterface;
@@ -30,16 +31,16 @@ public class AssessmentRepository {
                 .enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             registrationResponseLiveData.postValue(Resource.success(response.body()));
-                        }else if(response.code() == 400){
-                            registrationResponseLiveData.postValue(Resource.error("Exists",  null));
+                        } else if (response.code() == 400) {
+                            registrationResponseLiveData.postValue(Resource.error("Exists", null));
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                        registrationResponseLiveData.postValue(Resource.error(t.getMessage(),null));
+                        registrationResponseLiveData.postValue(Resource.error(t.getMessage(), null));
                     }
                 });
 
@@ -54,20 +55,43 @@ public class AssessmentRepository {
                 .enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             unlinkRegistrationResponseLiveData.postValue(Resource.success(response.body()));
-                        }else if(response.code() == 400){
+                        } else if (response.code() == 400) {
                             unlinkRegistrationResponseLiveData.postValue(Resource.error("Unlink error", response.body()));
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                        unlinkRegistrationResponseLiveData.postValue(Resource.error(t.getMessage(),null));
+                        unlinkRegistrationResponseLiveData.postValue(Resource.error(t.getMessage(), null));
                     }
                 });
 
         return unlinkRegistrationResponseLiveData;
+    }
+
+    public MutableLiveData<Resource<String>> saveTaskData(TaskEntryModel taskEntryModel) {
+
+        final MutableLiveData<Resource<String>> saveTaskResponseLiveData = new MutableLiveData<>();
+        apiInterface
+                .saveTaskData(taskEntryModel)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+                        if (response.isSuccessful())
+                            saveTaskResponseLiveData.postValue(Resource.success(response.body()));
+                        else
+                            saveTaskResponseLiveData.postValue(Resource.error(response.body(), null));
+
+                    }
+                    @Override
+                    public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                        saveTaskResponseLiveData.postValue(Resource.error(t.getMessage(), null));
+                    }
+                });
+
+        return saveTaskResponseLiveData;
     }
 
 }
